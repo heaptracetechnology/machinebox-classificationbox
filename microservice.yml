@@ -1,0 +1,177 @@
+omg: 1
+lifecycle:
+  startup:
+    command: ["machinebox-classificationbox"]
+info:
+  version: 1.0.0
+  title: Machinebox Classificationbox
+  description: This is a machinebox-classificationbox service.
+  contact:
+    name: Rohit Shetty
+    url: https://github.com/ht68rohit
+    email: rohits@heaptrace.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+actions:
+  createModel:
+    help: Analyze text with its sentiment and keywords.
+    http:
+      port: 3000
+      method: post
+      path: /createModel
+      contentType: application/json
+    arguments:
+      address:
+        type: string
+        in: requestBody
+        required: true
+        help: The address for client to connect eg- "http://IP-of-docker-machine:8080" with port.
+      id:
+        type: string
+        in: requestBody
+        required: true
+        help:  The model ID, if omitted a unique ID will be assigned.
+      name:
+        type: string
+        in: requestBody
+        required: true
+        help: The name of the model.
+      ngram:
+        type: int
+        in: requestBody
+        required: true
+        help: The number of word n-grams to generate from a body of text (default is 1).
+      skipgrams:
+        type: int
+        in: requestBody
+        required: true
+        help: The distance between words from which to generate n-grams (default is 0, no skipping).
+      classes:
+        type: list
+        in: requestBody
+        required: true
+        help: Two or more classes that the model will learn.
+    output:
+      type: map
+      contentType: application/json
+  teachModel:
+    help: Teach class with feature.
+    http:
+      port: 3000
+      method: post
+      path: /teachModel
+      contentType: application/json
+    arguments:
+      address:
+        type: string
+        in: requestBody
+        required: true
+        help: The address for client to connect eg- "http://IP-of-docker-machine:8080" with port.
+      modelId:
+        type: string
+        in: requestBody
+        required: true
+        help: The model ID.
+      class:
+        type: string
+        in: requestBody
+        required: true
+        help: The class that these inputs belong to.
+      inputs:
+        type: list
+        in: requestBody
+        required: true
+        help: The key, type and value of this feature.
+    output:
+      type: map
+      contentType: application/json
+  getModel:
+    help: Get model by ID.
+    http:
+      port: 3000
+      method: post
+      path: /getModel
+      contentType: application/json
+    arguments:
+      address:
+        type: string
+        in: requestBody
+        required: true
+        help: The address for client to connect eg- "http://IP-of-docker-machine:8080" with port.
+      modelId:
+        type: string
+        in: requestBody
+        required: true
+        help:  The model ID to get details.
+    output:
+      type: map
+      contentType: application/json
+  makePredictions:
+    help: Prepare model for prediction based on a series of input features.
+    http:
+      port: 3000
+      method: post
+      path: /makePredictions
+      contentType: application/json
+    arguments:
+      address:
+        type: string
+        in: requestBody
+        required: true
+        help: The address for client to connect eg- "http://IP-of-docker-machine:8080" with port.
+      modelId:
+        type: string
+        in: requestBody
+        required: true
+        help: The model ID.
+      limit:
+        type: int
+        in: requestBody
+        required: true
+        help: The maximum number of classes to return (default is 10).
+      inputs:
+        type: list
+        in: requestBody
+        required: true
+        help: Input features are properties that the model should consider when deciding which class they belong in.
+    output:
+      type: map
+      contentType: application/json
+  listModels:
+    help: List all models from classificationbox..
+    http:
+      port: 3000
+      method: post
+      path: /listModels
+      contentType: application/json
+    arguments:
+      address:
+        type: string
+        in: requestBody
+        required: true
+        help: The address for client to connect eg- "http://IP-of-docker-machine:8080" with port.
+    output:
+      type: list
+      contentType: application/json
+  deleteModel:
+    help: Delete model by ID from classificationbox.
+    http:
+      port: 3000
+      method: post
+      path: /deleteModel
+      contentType: application/json
+    arguments:
+      address:
+        type: string
+        in: requestBody
+        required: true
+        help: The address for client to connect eg- "http://IP-of-docker-machine:8080" with port.
+      modelId:
+        type: string
+        in: requestBody
+        required: true
+        help: The model ID to delete.
+    output:
+      type: map
+      contentType: application/json
