@@ -3,15 +3,14 @@ package classificationbox
 import (
 	"context"
 	"encoding/json"
-	//"fmt"
 	result "github.com/heaptracetechnology/machinebox-classificationbox/result"
 	"github.com/machinebox/sdk-go/classificationbox"
 	"net/http"
+	"os"
 )
 
 //ClassificationBox struct
 type ClassificationBox struct {
-	Address   string                      `json:"address,omitempty"`
 	ID        string                      `json:"id,omitempty"`
 	Name      string                      `json:"name"`
 	Ngrams    int                         `json:"ngrams,omitempty"`
@@ -40,6 +39,8 @@ type Message struct {
 //CreateModel MachineBox-ClassificationBox
 func CreateModel(responseWriter http.ResponseWriter, request *http.Request) {
 
+	address := os.Getenv("ADDRESS")
+
 	decoder := json.NewDecoder(request.Body)
 	var param ClassificationBox
 	decodeErr := decoder.Decode(&param)
@@ -48,7 +49,7 @@ func CreateModel(responseWriter http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	client := classificationbox.New(param.Address)
+	client := classificationbox.New(address)
 
 	ctx, _ := context.WithCancel(context.Background())
 
@@ -75,6 +76,8 @@ func CreateModel(responseWriter http.ResponseWriter, request *http.Request) {
 //TeachModel MachineBox-ClassificationBox
 func TeachModel(responseWriter http.ResponseWriter, request *http.Request) {
 
+	address := os.Getenv("ADDRESS")
+
 	decoder := json.NewDecoder(request.Body)
 	var param ClassificationBox
 	decodeErr := decoder.Decode(&param)
@@ -83,7 +86,7 @@ func TeachModel(responseWriter http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	client := classificationbox.New(param.Address)
+	client := classificationbox.New(address)
 
 	ctx, _ := context.WithCancel(context.Background())
 
@@ -106,6 +109,8 @@ func TeachModel(responseWriter http.ResponseWriter, request *http.Request) {
 //GetModel MachineBox-ClassificationBox
 func GetModel(responseWriter http.ResponseWriter, request *http.Request) {
 
+	address := os.Getenv("ADDRESS")
+
 	decoder := json.NewDecoder(request.Body)
 	var param ClassificationBox
 	decodeErr := decoder.Decode(&param)
@@ -114,7 +119,7 @@ func GetModel(responseWriter http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	client := classificationbox.New(param.Address)
+	client := classificationbox.New(address)
 
 	ctx, _ := context.WithCancel(context.Background())
 
@@ -131,6 +136,8 @@ func GetModel(responseWriter http.ResponseWriter, request *http.Request) {
 //MakePredictions MachineBox-ClassificationBox
 func MakePredictions(responseWriter http.ResponseWriter, request *http.Request) {
 
+	address := os.Getenv("ADDRESS")
+
 	decoder := json.NewDecoder(request.Body)
 	var param ClassificationBox
 	decodeErr := decoder.Decode(&param)
@@ -139,7 +146,7 @@ func MakePredictions(responseWriter http.ResponseWriter, request *http.Request) 
 		return
 	}
 
-	client := classificationbox.New(param.Address)
+	client := classificationbox.New(address)
 
 	ctx, _ := context.WithCancel(context.Background())
 
@@ -161,6 +168,8 @@ func MakePredictions(responseWriter http.ResponseWriter, request *http.Request) 
 //ListingModels MachineBox-ClassificationBox
 func ListingModels(responseWriter http.ResponseWriter, request *http.Request) {
 
+	address := os.Getenv("ADDRESS")
+
 	decoder := json.NewDecoder(request.Body)
 	var param ClassificationBox
 	decodeErr := decoder.Decode(&param)
@@ -169,7 +178,7 @@ func ListingModels(responseWriter http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	client := classificationbox.New(param.Address)
+	client := classificationbox.New(address)
 
 	ctx, _ := context.WithCancel(context.Background())
 
@@ -186,6 +195,8 @@ func ListingModels(responseWriter http.ResponseWriter, request *http.Request) {
 //DeleteModel MachineBox-ClassificationBox
 func DeleteModel(responseWriter http.ResponseWriter, request *http.Request) {
 
+	address := os.Getenv("ADDRESS")
+
 	decoder := json.NewDecoder(request.Body)
 	var param ClassificationBox
 	decodeErr := decoder.Decode(&param)
@@ -194,7 +205,7 @@ func DeleteModel(responseWriter http.ResponseWriter, request *http.Request) {
 		return
 	}
 
-	client := classificationbox.New(param.Address)
+	client := classificationbox.New(address)
 
 	ctx, _ := context.WithCancel(context.Background())
 
