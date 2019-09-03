@@ -30,7 +30,6 @@ actions:
       id:
         type: string
         in: requestBody
-        required: true
         help:  The model ID, if omitted a unique ID will be assigned.
       name:
         type: string
@@ -40,12 +39,10 @@ actions:
       ngram:
         type: int
         in: requestBody
-        required: true
         help: The number of word n-grams to generate from a body of text (default is 1).
       skipgrams:
         type: int
         in: requestBody
-        required: true
         help: The distance between words from which to generate n-grams (default is 0, no skipping).
       classes:
         type: list
