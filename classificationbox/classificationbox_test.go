@@ -39,7 +39,7 @@ var _ = Describe("Create model with invalid param", func() {
 var _ = Describe("Create model with valid param", func() {
 
 	classesList := []string{"class1", "class2", "class3"}
-	classificationBox := ClassificationBox{Address: "http://localhost:8080", ID: "Test Model ID", Name: "Test ClassifationModel", Ngrams: 1, Skipgrams: 1, Classes: classesList}
+	classificationBox := ClassificationBox{ID: "Test Model ID", Name: "Test ClassifationModel", Ngrams: 1, Skipgrams: 1, Classes: classesList}
 	requestBody := new(bytes.Buffer)
 	encodeErr := json.NewEncoder(requestBody).Encode(classificationBox)
 	if encodeErr != nil {
@@ -91,7 +91,7 @@ var _ = Describe("Teach model with invalid param", func() {
 
 var _ = Describe("Teach model with valid param", func() {
 
-	classificationBox := ClassificationBox{Address: "http://localhost:8080", ModelID: "omg model", Class: "class"}
+	classificationBox := ClassificationBox{ModelID: "omg model", Class: "class"}
 	requestBody := new(bytes.Buffer)
 	encodeErr := json.NewEncoder(requestBody).Encode(classificationBox)
 	if encodeErr != nil {
@@ -143,7 +143,7 @@ var _ = Describe("Get model with invalid param", func() {
 
 var _ = Describe("Get model with valid param", func() {
 
-	classificationBox := ClassificationBox{Address: "http://localhost:8080", ModelID: "omg model"}
+	classificationBox := ClassificationBox{ModelID: "omg model"}
 	requestBody := new(bytes.Buffer)
 	encodeErr := json.NewEncoder(requestBody).Encode(classificationBox)
 	if encodeErr != nil {
@@ -195,7 +195,7 @@ var _ = Describe("Make predictions with invalid param", func() {
 
 var _ = Describe("Make predictions with valid param", func() {
 
-	classificationBox := ClassificationBox{Address: "http://localhost:8080", ModelID: "omg model", Limit: 10}
+	classificationBox := ClassificationBox{ModelID: "omg model", Limit: 10}
 	requestBody := new(bytes.Buffer)
 	encodeErr := json.NewEncoder(requestBody).Encode(classificationBox)
 	if encodeErr != nil {
@@ -247,7 +247,7 @@ var _ = Describe("List models with invalid param", func() {
 
 var _ = Describe("List models with valid param", func() {
 
-	classificationBox := ClassificationBox{Address: "http://localhost:8080"}
+	classificationBox := ClassificationBox{}
 	requestBody := new(bytes.Buffer)
 	encodeErr := json.NewEncoder(requestBody).Encode(classificationBox)
 	if encodeErr != nil {
@@ -299,7 +299,7 @@ var _ = Describe("Delete Model with invalid param", func() {
 
 var _ = Describe("Delete Model valid param", func() {
 
-	classificationBox := ClassificationBox{Address: "http://localhost:8080"}
+	classificationBox := ClassificationBox{}
 	requestBody := new(bytes.Buffer)
 	encodeErr := json.NewEncoder(requestBody).Encode(classificationBox)
 	if encodeErr != nil {
